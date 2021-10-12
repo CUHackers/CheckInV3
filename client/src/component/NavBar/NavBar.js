@@ -95,7 +95,7 @@ const NavBar = () => {
                         noWrap
                         sx={{ flexGrow: 1 }}
                     >
-                        Dashboard
+                        CUCheckIn
                     </Typography>
                 </Toolbar>
             </AppBar>
