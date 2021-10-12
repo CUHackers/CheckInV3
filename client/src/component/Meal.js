@@ -2,8 +2,23 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import React, { useRef } from 'react'
 
 const Meal = () => {
+    let input = useRef(null);
+
+    // need to test which one to use
+    const handleOnChange = (event) => {
+        console.log(event.target.value);
+    };
+
+    const handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            console.log(event.target.value);
+            input.current.value = '';
+        }
+    };
+
     return (
         <Container maxWidth="xl" sx={{ mt: '20vh', mb: '20vh' }}>
             <Grid
@@ -18,7 +33,13 @@ const Meal = () => {
                     </Typography>
                 </Grid>
                 <Grid item xs={12} md={6}>
-                    <TextField fullWidth id="outlined-basic" variant="outlined" />
+                    <TextField
+                        fullWidth
+                        onKeyPress={handleKeyPress}
+                        inputRef={input}
+                        id="outlined-basic"
+                        variant="outlined"
+                    />
                 </Grid>
             </Grid>
         </Container>
