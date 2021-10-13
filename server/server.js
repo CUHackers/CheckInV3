@@ -2,7 +2,10 @@ const AWS = require('aws-sdk')
 require('dotenv').config()
 const express = require('express')
 const app = express()
+const cors = require('cors')
 app.use(express.json())
+
+app.use(cors())
 
 AWS.config.update({
     region: process.env.AWS_DEFAULT_REGION,
@@ -22,7 +25,7 @@ const getPeople = async () => {
     return hackers
 };
 
-const addUpdatePerson = async (hacker) =>{
+const addUpdatePerson = async (hacker) => {
     const params = {
         TableName: TABLE_NAME,
         Item: hacker
@@ -52,7 +55,7 @@ const delPersonByID = async (id) => {
 
 const port = process.env.PORT || 4000
 
-app.listen(port, () =>{
+app.listen(port, () => {
     console.log(`Listening on port ${port}...`)
 })
 
@@ -60,14 +63,14 @@ app.get('/', (req, res) => {
     res.send('')
 })
 
-app.get('/hackers', async (req, res) =>{
+app.get('/hackers', async (req, res) => {
     try {
         const hackers = await getPeople()
         res.json(hackers)
     } catch (err) {
         console.error(err)
-        res.status(500).json({err: 'Whoops, something went wrong...'})
-    }    
+        res.status(500).json({ err: 'Whoops, something went wrong...' })
+    }
 })
 
 app.get('/hackers/:id', async (req, res) => {
@@ -77,7 +80,7 @@ app.get('/hackers/:id', async (req, res) => {
         res.json(hacker)
     } catch (err) {
         console.error(err)
-        res.status(500).json({ err: 'Whoops, something went wrong...'})
+        res.status(500).json({ err: 'Whoops, something went wrong...' })
     }
 })
 
@@ -88,29 +91,29 @@ app.post('/hackers', async (req, res) => {
         res.json(newHacker)
     } catch (err) {
         console.error(err)
-        res.status(500).json({ err: 'Whoops, something went wrong...'})
+        res.status(500).json({ err: 'Whoops, something went wrong...' })
     }
 })
 
-app.put('/hackers/:id', async (req, res) =>{
+app.put('/hackers/:id', async (req, res) => {
     const hacker = req.body
-    const {id} = req.params
+    const { id } = req.params
     hacker.id = id
     try {
         const newHacker = await addUpdatePerson(hacker)
         res.json(newHacker)
     } catch (err) {
         console.error(err)
-        res.status(500).json({ err: 'Whoops, something went wrong...'})
+        res.status(500).json({ err: 'Whoops, something went wrong...' })
     }
 })
 
-app.delete('/hackers/:id', async (req, res) =>{
-    const {id} = req.params
+app.delete('/hackers/:id', async (req, res) => {
+    const { id } = req.params
     try {
         res.json(await delPersonByID(id))
     } catch (err) {
         console.error(err)
-        res.status(500).json({ err: 'Whoops, something went wrong...'})
+        res.status(500).json({ err: 'Whoops, something went wrong...' })
     }
 })
