@@ -20,7 +20,7 @@ const Hardware = () => {
     };
 
     return (
-        <Container maxWidth="xl" sx={{ mt: '20vh', mb: '20vh' }}>
+        <Container maxWidth="lg" sx={{ mt: '20vh', mb: '20vh' }}>
             <Grid
                 container
                 spacing={2}
