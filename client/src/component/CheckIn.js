@@ -11,7 +11,6 @@ const CheckIn = () => {
     let name = useRef(null);
     let id = useRef(null);
     let [newUser, setNewuser] = useState(false);
-
     const handleKeyPress = (event) => {
         if (event.key === 'Enter') {
 
@@ -32,7 +31,6 @@ const CheckIn = () => {
             else {
                 // get id and check if id exist
                 id.current = input.current.value;
-                console.log(id.current)
                 API.get('/hackers/' + id.current).then(res => {
                     if (res.data.Item) {
                         // update status
@@ -75,7 +73,7 @@ const CheckIn = () => {
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <TextField
-                        autoFocus 
+                        autoFocus
                         fullWidth
                         onKeyPress={handleKeyPress}
                         inputRef={input}
