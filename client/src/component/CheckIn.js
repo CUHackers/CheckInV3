@@ -12,11 +12,6 @@ const CheckIn = () => {
     let id = useRef(null);
     let [newUser, setNewuser] = useState(false);
 
-    // need to test which one to use
-    const handleOnChange = (event) => {
-        console.log(event.target.value);
-    };
-
     const handleKeyPress = (event) => {
         if (event.key === 'Enter') {
 
@@ -29,7 +24,7 @@ const CheckIn = () => {
                     "name": name.current,
                     "checkedIn": true
                 }).then(res => {
-                    if (res.status == 200) {
+                    if (res.status === 200) {
                         setNewuser(false);
                     }
                 })
@@ -44,7 +39,7 @@ const CheckIn = () => {
                         let hacker = res.data.Item;
                         hacker.checkedIn = !hacker.checkedIn;
                         API.put('/hackers/' + id.current, hacker).then(res => {
-                            if (res.status == 200) {
+                            if (res.status === 200) {
                                 if (hacker.checkedIn) {
                                     console.log('User Checked In');
                                 }
@@ -80,6 +75,7 @@ const CheckIn = () => {
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <TextField
+                        autoFocus 
                         fullWidth
                         onKeyPress={handleKeyPress}
                         inputRef={input}

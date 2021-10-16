@@ -7,11 +7,6 @@ import React, { useRef } from 'react'
 const Meal = () => {
     let input = useRef(null);
 
-    // need to test which one to use
-    const handleOnChange = (event) => {
-        console.log(event.target.value);
-    };
-
     const handleKeyPress = (event) => {
         if (event.key === 'Enter') {
             console.log(event.target.value);
@@ -20,7 +15,7 @@ const Meal = () => {
     };
 
     return (
-        <Container maxWidth="xl" sx={{ mt: '20vh', mb: '20vh' }}>
+        <Container maxWidth="lg" sx={{ mt: '20vh', mb: '20vh' }}>
             <Grid
                 container
                 spacing={2}

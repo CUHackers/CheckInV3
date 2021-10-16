@@ -96,24 +96,6 @@ TablePaginationActions.propTypes = {
 	rowsPerPage: PropTypes.number.isRequired,
 };
 
-function createData() {
-    let data = [];
-    let item = {};
-    API.get('/hackers').then(res => {
-        if (res.status == 200) {
-            data = res.data.Items;
-            for (let i=0; i<data.length; i++) {
-                item.checkedIn = data[i].checkedIn;
-                item.id = data[i].id;
-                item.name = data[i].name;
-                item.tech = data[i].tech;
-                //data.push(item);
-            }
-        }
-    })
-    return data;
-}
-
 const Home = () => {
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -121,7 +103,7 @@ const Home = () => {
     
     API.get('/hackers').then(res => {
         let data = []
-        if (res.status == 200) {
+        if (res.status === 200) {
             for (const i of res.data.Items) {
                 data.push(i);
             }
