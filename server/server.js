@@ -43,6 +43,18 @@ const getPersonByID = async (id) => {
     return await dynamoClient.get(params).promise()
 }
 
+const getPersonByName = async (name) => {
+    const params = {
+        TableName: TABLE_NAME,
+        IndexName: 'hackerName',
+        KeyConditionExpression: 'hackerName = :hackerName',
+        ExpressionAttributeValues: {
+            ':hackerName': name,
+        },
+    }
+    return await dynamoClient.query(params).promise()
+}
+
 const delPersonByID = async (id) => {
     const params = {
         TableName: TABLE_NAME,
@@ -77,6 +89,17 @@ app.get('/hackers/:id', async (req, res) => {
     const id = req.params.id
     try {
         const hacker = await getPersonByID(id)
+        res.json(hacker)
+    } catch (err) {
+        console.error(err)
+        res.status(500).json({ err: 'Whoops, something went wrong...' })
+    }
+})
+
+app.get('/hackers/names/:name', async (req, res) => {
+    const name = req.params.name
+    try {
+        const hacker = await getPersonByName(name)
         res.json(hacker)
     } catch (err) {
         console.error(err)

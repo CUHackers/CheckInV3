@@ -8,7 +8,7 @@ import React, { useState, useRef } from 'react'
 import API from '../api';
 
 
-const CheckIn = () => {
+const Register = () => {
     let input = useRef(null);
     let name = useRef(null);
     let message = useRef(null);
@@ -30,10 +30,20 @@ const CheckIn = () => {
             if (newUser) {
                 // get name create entry in db
                 name.current = input.current.value;
+                // console.log('name: ' + name.current);
+                
+                // API.get('/hackers/names/' + name.current).then(res => {
+                //     console.log('testing');
+                //     if (res.data.Items) {
+                //         let hacker = res.data.Items[0];
+                //         console.log(hacker.hackerName);
+                //     }
+                // })
+
                 API.post('/hackers', {
                     "tech": [],
                     "id": id.current,
-                    "name": name.current,
+                    "hackerName": name.current,
                     "checkedIn": true
                 }).then(res => {
                     if (res.status === 200) {
@@ -55,12 +65,12 @@ const CheckIn = () => {
                             if (res.status === 200) {
                                 if (hacker.checkedIn) {
                                     console.log('User Checked In');
-                                    message.current = 'User Checked In: ' + hacker.name;
+                                    message.current = 'User Checked In: ' + hacker.hackerName;
                                     handleOpen();
                                 }
                                 else {
                                     console.log('User Checked Out');
-                                    message.current = 'User Checked Out: ' + hacker.name;
+                                    message.current = 'User Checked Out: ' + hacker.hackerName;
                                     handleOpen();
                                 }
                             }
@@ -68,10 +78,10 @@ const CheckIn = () => {
                     }
                     else {
                         setNewuser(true);
+                        // message.current = 'Cannot find user id ' + id.current;
+                        // handleOpen()
                     }
                 })
-
-
             }
             input.current.value = '';
         }
@@ -88,7 +98,7 @@ const CheckIn = () => {
                 autoHideDuration={2000}
                 onClose={handleClose}
             >
-                <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                <Alert onClose={handleClose} severity="info" sx={{ width: '100%' }}>
                     {message.current}
                 </Alert>
             </Snackbar>
@@ -99,8 +109,11 @@ const CheckIn = () => {
                 justifyContent="center"
             >
                 <Grid item xs={12} md={6} style={{ textAlign: "center" }}>
-                    <Typography variant="h1" gutterBottom component="div">
-                        {newUser ? 'Enter Your Full Name' : 'Check In/Out'}
+                    <Typography variant='h1' gutterBottom component="div">
+                        Registration
+                    </Typography>
+                    <Typography variant="h3" gutterBottom component="div">
+                        {newUser ? 'Enter Name:' : 'Scan RFID Card:'}
                     </Typography>
                 </Grid>
                 <Grid item xs={12} md={6}>
@@ -118,4 +131,4 @@ const CheckIn = () => {
     );
 }
 
-export default CheckIn;
+export default Register;

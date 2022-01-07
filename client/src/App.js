@@ -5,7 +5,7 @@ import NavBar from "./component/NavBar/NavBar";
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import CheckIn from "./component/CheckIn";
+import Register from "./component/Register";
 import Meal from "./component/Meal";
 import Hardware from "./component/Hardware";
 
@@ -29,7 +29,7 @@ function App() {
                     <Toolbar />
                     <Switch>
                         <Route exact path="/" component={Home} />
-                        <Route exact path="/checkin" component={CheckIn} />
+                        <Route exact path="/register" component={Register} />
                         <Route exact path="/meal" component={Meal} />
                         <Route exact path="/hardware" component={Hardware} />
                         <Route component={NotFound} />

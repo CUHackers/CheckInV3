@@ -5,6 +5,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import PersonIcon from '@mui/icons-material/Person';
+import AddBoxIcon from '@mui/icons-material/AddBox'
 import FastfoodIcon from '@mui/icons-material/Fastfood';
 import HandymanIcon from '@mui/icons-material/Handyman';
 import HomeIcon from '@mui/icons-material/Home';
@@ -42,7 +43,8 @@ const NavList = () => {
         <List>
             <div>
                 <ListItemLink to="/" primary="Home" icon={<HomeIcon />} />
-                <ListItemLink to="/checkin" primary="Check In/Out" icon={<PersonIcon />} />
+                <ListItemLink to="/register" primary="Register" icon={<AddBoxIcon />} />
+                <ListItemLink to="/checkin" primary="Check In/Out" icon={<PersonIcon />}/>
                 <ListItemLink to="/meal" primary="Meal" icon={<FastfoodIcon />} />
                 <ListItemLink to="/hardware" primary="Hardware" icon={<HandymanIcon />} />
             </div>

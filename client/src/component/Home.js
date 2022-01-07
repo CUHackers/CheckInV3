@@ -108,7 +108,7 @@ const Home = () => {
                 for (const i of res.data.Items) {
                     hackers.push(i);
                 }
-                setRows(hackers.sort((a, b) => (a.name < b.name ? -1 : 1)));
+                setRows(hackers.sort((a, b) => (a.hackerName < b.hackerName ? -1 : 1)));
             }
         });
     }, []);
@@ -148,7 +148,7 @@ const Home = () => {
                             <TableCell component="th" scope="row">
                                 {row.id}
                             </TableCell>
-                            <TableCell align="right">{row.name}</TableCell>
+                            <TableCell align="right">{row.hackerName}</TableCell>
                             <TableCell align="right">{row.tech.length > 1 ? row.tech[0] + " and more" : row.tech}</TableCell>
                             <TableCell align="right">{(row.checkedIn) ? <CheckIcon /> : <CloseIcon />} </TableCell>
                         </TableRow>
