@@ -8,7 +8,7 @@ import React, { useState, useRef } from 'react'
 import API from '../api';
 
 
-const Register = () => {
+const Checkin = () => {
     let input = useRef(null);
     let name = useRef(null);
     let message = useRef(null);
@@ -26,32 +26,46 @@ const Register = () => {
 
     const handleKeyPress = (event) => {
         if (event.key === 'Enter') {
-
             if (newUser) {
                 // get name create entry in db
                 name.current = input.current.value;
                 // console.log('name: ' + name.current);
-                
-                // API.get('/hackers/names/' + name.current).then(res => {
-                //     console.log('testing');
-                //     if (res.data.Items) {
-                //         let hacker = res.data.Items[0];
-                //         console.log(hacker.hackerName);
-                //     }
-                // })
+                API.get('/hackers/names/' + name.current).then(res => {
+                    if (res.data.Items) {
+                        let hacker = res.data.Items[0];
+                        if (hacker) {
+                            console.log(hacker.hackerName + ' ' + hacker.id);
+                            API.delete('/hackers/' + hacker.id);
 
-                API.post('/hackers', {
-                    "tech": [],
-                    "id": id.current,
-                    "hackerName": name.current,
-                    "checkedIn": true
-                }).then(res => {
-                    if (res.status === 200) {
-                        message.current = 'User Created: ' + name.current;
-                        handleOpen();
-                        setNewuser(false);
+                            API.post('/hackers', {
+                                    "tech": [],
+                                    "id": id.current,
+                                    "hackerName": name.current,
+                                    "checkedIn": true
+                                }).then(res => {
+                                    if (res.status === 200) {
+                                        message.current = 'User Created: ' + name.current;
+                                        handleOpen();
+                                        setNewuser(false);
+                                    }
+                                })
+                        } 
                     }
                 })
+
+
+                // API.post('/hackers', {
+                //     "tech": [],
+                //     "id": id.current,
+                //     "hackerName": name.current,
+                //     "checkedIn": true
+                // }).then(res => {
+                //     if (res.status === 200) {
+                //         message.current = 'User Created: ' + name.current;
+                //         handleOpen();
+                //         setNewuser(false);
+                //     }
+                // })
             }
             else {
                 // get id and check if id exist
@@ -83,6 +97,7 @@ const Register = () => {
                     }
                 })
             }
+
             input.current.value = '';
         }
     };
@@ -110,7 +125,7 @@ const Register = () => {
             >
                 <Grid item xs={12} md={6} style={{ textAlign: "center" }}>
                     <Typography variant='h1' gutterBottom component="div">
-                        Walk In Registration
+                        Checkin
                     </Typography>
                     <Typography variant="h3" gutterBottom component="div">
                         {newUser ? 'Enter Name:' : 'Scan RFID Card:'}
@@ -131,4 +146,4 @@ const Register = () => {
     );
 }
 
-export default Register;
+export default Checkin;
