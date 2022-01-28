@@ -41,7 +41,12 @@ const Checkin = () => {
                                     "tech": [],
                                     "id": id.current,
                                     "hackerName": name.current,
-                                    "checkedIn": true
+                                    "checkedIn": true,
+                                    "meal1": true,
+                                    "meal2": true,
+                                    "meal3": true,
+                                    "meal4": true,
+                                    "meal5": true
                                 }).then(res => {
                                     if (res.status === 200) {
                                         message.current = 'User Created: ' + name.current;
@@ -52,20 +57,6 @@ const Checkin = () => {
                         } 
                     }
                 })
-
-
-                // API.post('/hackers', {
-                //     "tech": [],
-                //     "id": id.current,
-                //     "hackerName": name.current,
-                //     "checkedIn": true
-                // }).then(res => {
-                //     if (res.status === 200) {
-                //         message.current = 'User Created: ' + name.current;
-                //         handleOpen();
-                //         setNewuser(false);
-                //     }
-                // })
             }
             else {
                 // get id and check if id exist

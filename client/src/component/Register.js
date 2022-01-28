@@ -30,21 +30,17 @@ const Register = () => {
             if (newUser) {
                 // get name create entry in db
                 name.current = input.current.value;
-                // console.log('name: ' + name.current);
-                
-                // API.get('/hackers/names/' + name.current).then(res => {
-                //     console.log('testing');
-                //     if (res.data.Items) {
-                //         let hacker = res.data.Items[0];
-                //         console.log(hacker.hackerName);
-                //     }
-                // })
 
                 API.post('/hackers', {
                     "tech": [],
                     "id": id.current,
                     "hackerName": name.current,
-                    "checkedIn": true
+                    "checkedIn": true,
+                    "meal1": true,
+                    "meal2": true,
+                    "meal3": true,
+                    "meal4": true,
+                    "meal5": true
                 }).then(res => {
                     if (res.status === 200) {
                         message.current = 'User Created: ' + name.current;
