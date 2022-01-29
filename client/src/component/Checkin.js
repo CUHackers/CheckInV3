@@ -38,24 +38,27 @@ const Checkin = () => {
                             API.delete('/hackers/' + hacker.id);
 
                             API.post('/hackers', {
-                                    "tech": [],
-                                    "id": id.current,
-                                    "hackerName": name.current,
-                                    "checkedIn": true,
-                                    "meal1": true,
-                                    "meal2": true,
-                                    "meal3": true,
-                                    "meal4": true,
-                                    "meal5": true
-                                }).then(res => {
-                                    if (res.status === 200) {
-                                        message.current = 'User Created: ' + name.current;
-                                        handleOpen();
-                                        setNewuser(false);
-                                    }
-                                })
-                        } 
-                    }
+                                "tech": [],
+                                "id": id.current,
+                                "hackerName": name.current,
+                                "checkedIn": true,
+                                "meal1": true,
+                                "meal2": true,
+                                "meal3": true,
+                                "meal4": true,
+                                "meal5": true
+                            }).then(res => {
+                                if (res.status === 200) {
+                                    message.current = 'User Created: ' + name.current;
+                                    handleOpen();
+                                    setNewuser(false);
+                                }
+                            })
+                        } else {
+                            message.current = 'Name not found. Check spelling.'
+                            handleOpen();
+                        }
+                    } 
                 })
             }
             else {

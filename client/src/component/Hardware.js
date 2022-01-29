@@ -128,6 +128,12 @@ const Hardware = () => {
                         </Grid>
                     </Fragment>
                 }
+                <Typography 
+                    variant="h3"
+                    style={{ textAlign: "center" }}
+                >
+                    Scan RFID Card
+                </Typography>
                 <Grid item xs={12} md={6}>
                     <TextField
                         fullWidth

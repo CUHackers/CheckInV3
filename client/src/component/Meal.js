@@ -96,7 +96,8 @@ const Meal = () => {
                         }
                     }
                 } else {
-                    console.log('User not found');
+                    message.current = 'ID does not exist in the database'
+                    handleOpen();
                 }                
             })
         }
